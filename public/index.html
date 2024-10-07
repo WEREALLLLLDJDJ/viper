@@ -25,6 +25,7 @@
       width: 100%;
       height: 100%;
       z-index: 0; /* Send particles to the back */
+      filter: blur(10px); /* Blur the particles */
     }
 
     .center-container {
@@ -34,9 +35,6 @@
       padding: 20px;
       z-index: 1; /* Bring search input to the front */
       position: relative;
-      backdrop-filter: blur(10px); /* Blur background */
-      background-color: rgba(255, 255, 255, 0.2); /* Slightly transparent white background for contrast */
-      border-radius: 10px; /* Optional: Rounded corners for the container */
     }
 
     .frame {
@@ -62,13 +60,17 @@
       cursor: pointer;
       z-index: 2;
     }
+
+    h1 {
+      color: white; /* Change header color to white for contrast */
+    }
   </style>
 </head>
 
 <body>
   <div id="particles-js"></div> <!-- Particle background -->
   <div class="center-container">
-    <h1 style="color: white;">Search</h1> <!-- Change header color to white for contrast -->
+    <h1>Search</h1>
     <input class="pxyinput" type="text" placeholder="Search..." />
   </div>
   <button class="refresh-button" id="refreshButton">Home</button>
@@ -81,7 +83,7 @@
     particlesJS("particles-js", {
       particles: {
         number: { value: 80, density: { enable: true, value_area: 800 } },
-        color: { value: "#04dc00" }, // White particles
+        color: { value: "#ffffff" }, // White particles
         shape: {
           type: "circle",
           stroke: { width: 0, color: "#000000" },
