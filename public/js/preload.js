@@ -1,7 +1,6 @@
 // Any scripts that need to be preloaded in advance, like ads or analytics
 
 // UV Service Worker
-
 if (/debug/.test(window.location)) {
   console.log('Debug mode enabled')
   var eruda = document.createElement('script')
@@ -12,7 +11,6 @@ if (/debug/.test(window.location)) {
     eruda.init()
   }
 }
-
 
 const swAllowedHostnames = ['localhost', '127.0.0.1']
 
@@ -41,7 +39,6 @@ fa.type = 'text/css'
 document.head.appendChild(fa)
 
 // CSS Scripts
-
 const hover = document.createElement('link')
 hover.href = 'https://cdn.jsdelivr.net/gh/ianlunn/hover/css/hover-min.css'
 hover.rel = 'stylesheet'
@@ -60,9 +57,3 @@ function gtag() {
 gtag('js', new Date())
 
 gtag('config', 'G-66ZE075DLD')
-
-// Ads
-var ads = document.createElement("script")
-ads.src = "//strodeintended.com/4e/d6/be/4ed6beda21708e4b8f45fca957964a1f.js"
-ads.type = "text/javascript"
-document.head.appendChild(ads)
