@@ -19,14 +19,6 @@
       overflow: hidden; /* Prevent scrollbars */
       background-color: black; /* Set background to black */
       user-select: none; /* Prevent text selection */
-      opacity: 0; /* Start with hidden opacity for animation */
-      animation: fadeIn 1s forwards; /* Fade in animation */
-    }
-
-    @keyframes fadeIn {
-      to {
-        opacity: 1; /* Fade in to full opacity */
-      }
     }
 
     #particles-js {
@@ -50,10 +42,10 @@
 
     .frame {
       width: 100%;
-      height: calc(100%); /* Adjust height to account for the header */
+      height: 100vh; /* Set height to 100% of viewport height */
       border: none;
       position: absolute;
-      top: 60px; /* Position below the header */
+      top: 0; /* Position at the top */
       left: 0;
       z-index: 0;
     }
@@ -78,6 +70,8 @@
       text-shadow: 0 0 5px #04dc00, 0 0 10px #04dc00, 0 0 15px #04dc00; /* Add glowing effect */
       font-family: Arial, sans-serif; /* Set font to Arial */
       margin-bottom: 20px; /* Add margin for spacing */
+      opacity: 0; /* Start with hidden opacity for animation */
+      animation: fadeIn 1s forwards; /* Fade in animation */
     }
 
     .pxyinput {
@@ -90,6 +84,15 @@
       color: rgb(45,45,45,.9); /* Text color */
       background-color: rgb(25,25,25, 0.9); /* Light background for input */
       transition: border-color 0.3s ease; /* Animation for border color change */
+      opacity: 0; /* Start with hidden opacity for animation */
+      animation: fadeIn 1s forwards; /* Fade in animation */
+      animation-delay: 0.5s; /* Delay for input box animation */
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1; /* Fade in to full opacity */
+      }
     }
 
     .pxyinput:focus {
