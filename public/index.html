@@ -8,9 +8,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
-    <script src="/uv/uv.bundle.js" charset="UTF-8"></script>
-    <script src="/uv/uv.config.js"></script>
-    <script src="/js/preload.js"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
         :root {
@@ -31,7 +28,7 @@
             height: 100%;
             top: 0;
             left: 0;
-            z-index: -1;
+            z-index: -1; /* Behind other content */
             filter: blur(10px);
         }
 
@@ -46,45 +43,50 @@
             overflow: hidden;
         }
 
-        .center-container {
+        .main {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 20px;
-            z-index: 1;
-            position: relative;
             color: var(--primary-color);
             text-shadow: 0 0 20px var(--text-shadow-color), 0 0 30px var(--text-shadow-color);
+            user-select: none;
+            z-index: 1; /* Above the particles */
         }
 
-        .frame {
-            width: 100%;
-            height: calc(100% - 60px);
-            border: none;
-            position: absolute;
-            top: 60px;
-            left: 0;
-            z-index: 0;
+        h1 {
+            font-size: 4em;
+            margin: 0;
+            animation: fadeIn 1.5s ease-in-out forwards;
+            opacity: 0;
         }
 
-        .refresh-button {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            display: none;
-            padding: 10px 15px;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            z-index: 2;
-            transition: background-color 0.3s;
+        .phrase {
+            font-size: 1.2em;
+            margin: 20px 0;
+            color: #ffffff;
+            text-shadow: 0 0 10px #ffffff;
+            animation: fadeIn 2.5s ease-in-out forwards;
+            opacity: 0;
         }
 
-        .refresh-button:hover {
-            background-color: var(--hover-text-color);
+        .search-bar {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+            animation: fadeIn 3.5s ease-in-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
         }
 
         .form__input {
@@ -105,23 +107,82 @@
         .form__input:focus {
             border-color: #fff;
         }
+
+        .refresh-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: none;
+            padding: 10px 15px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 2; /* Above everything */
+            transition: background-color 0.3s;
+        }
+
+        .refresh-button:hover {
+            background-color: var(--hover-text-color);
+        }
+
+        .frame {
+            width: 100%;
+            height: calc(100% - 60px);
+            border: none;
+            position: absolute;
+            top: 60px;
+            left: 0;
+            z-index: 0;
+        }
     </style>
 </head>
 
 <body>
     <div id="particles-js"></div>
 
-    <div class="center-container">
-        <h1>Search</h1>
-        <input id="uv-address" type="text" placeholder="Search..." class="form__input" required aria-label="Search input" />
-    </div>
-    
+    <main class="main">
+        <h1>Viper</h1>
+        <div class="phrase" id="random-phrase"></div>
+        <div class="search-bar">
+            <form id="uv-form" aria-label="Search Form">
+                <input id="uv-address" type="text" placeholder="Search..." class="form__input" required aria-label="Search input" />
+            </form>
+        </div>
+    </main>
+
     <button class="refresh-button" id="refreshButton">Home</button>
     <iframe class="frame" id="contentFrame"></iframe>
 
     <script src="./js/index.js"></script>
     <script src="./js/search.js"></script>
     <script>
+        const phrases = [
+            "Ermmmm... what the sigma?",
+            "I love interstellar!",
+            "v1.00 is horrible!",
+            "I can't code.",
+            "Siege is a fun game!",
+            "I love proxies!",
+            "Too many memes!",
+            "Javascript 😍",
+            "R.I.P Project Unblocked.",
+            "Sick burn bro!",
+            "13,000 lines of code!",
+            "Best proxy!",
+            "Honey? Where's my supersuit?",
+            "Define interface.",
+            "Game page soon?",
+            "Sub to Dustie Fn!",
+            "Go Guardian got nothin on me!"
+        ];
+
+        const displayRandomPhrase = () => {
+            const randomIndex = Math.floor(Math.random() * phrases.length);
+            document.getElementById('random-phrase').textContent = phrases[randomIndex];
+        };
+
         // Initialize particles.js
         particlesJS("particles-js", {
             particles: {
@@ -207,6 +268,9 @@
 
         // Event listener for the refresh button
         refreshButton.addEventListener('click', refreshPage);
+
+        // Display a random phrase on load
+        displayRandomPhrase();
     </script>
 </body>
 
