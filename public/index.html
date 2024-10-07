@@ -1,38 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Viper</title>
   <script src="/uv/uv.bundle.js" charset="UTF-8"></script>
   <script src="/uv/uv.config.js"></script>
   <script src="/js/preload.js"></script>
-  <link rel="stylesheet" href="styles.css">
-  <style>
-    /* CSS for fullscreen iframe */
-    .frame {
-      display: none; /* Initially hidden */
-      width: 100%;
-      height: 100vh; /* Full height */
-      border: none;
-      position: fixed; /* Fixed positioning */
-      top: 0;
-      left: 0;
-      z-index: 1; /* Place it above other elements */
-    }
-
-    .center-container {
-      position: relative;
-      z-index: 2; /* Ensure this is above the iframe */
-      text-align: center;
-      margin-top: 20px;
-    }
-
-    #home-button {
-      margin-top: 10px;
-    }
-  </style>
 </head>
 
 <body theme="main">
@@ -40,45 +13,18 @@
     <div class="logo">
       <h1>Viper</h1>
     </div>
+
     <p id="time"></p>
   </nav>
 
   <div class="center-container">
     <h1>Search</h1>
     <input class="pxyinput" type="text" placeholder="Search..." />
-    <button id="home-button" style="display: none;">Home</button>
   </div>
-  <iframe class="frame" id="content-frame"></iframe>
-
-  <script src="./js/index.js"></script>
-  <script src="./js/search.js"></script>
-  <script>
-    const iframe = document.getElementById('content-frame');
-    const homeButton = document.getElementById('home-button');
-
-    // Function to show iframe and home button
-    function showIframe(url) {
-      iframe.src = url;
-      iframe.style.display = 'block';  // Show the iframe
-      homeButton.style.display = 'block';  // Show the home button
-    }
-
-    // Function to hide iframe and home button
-    function hideIframe() {
-      iframe.style.display = 'none';  // Hide the iframe
-      homeButton.style.display = 'none';  // Hide the home button
-    }
-
-    // Add event listener for home button
-    homeButton.addEventListener('click', function() {
-      hideIframe();
-    });
-
-    // Example usage: Call showIframe with a URL to display
-    // Uncomment this line to test the iframe visibility
-    // showIframe('https://example.com'); // Replace with your desired URL
-  </script>
-
+  <iframe class="frame"></iframe>
 </body>
+
+<script src="./js/index.js"></script>
+<script src="./js/search.js"></script>
 
 </html>
