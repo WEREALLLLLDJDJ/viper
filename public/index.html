@@ -36,6 +36,7 @@
       padding: 20px;
       z-index: 1; /* Bring search input to the front */
       position: relative;
+      height: 100%; /* Fill the height */
     }
 
     .frame {
@@ -64,7 +65,7 @@
 
     h1 {
       color: #04dc00; /* Change header color to #04dc00 */
-      font-size: 3em; /* Increase font size */
+      font-size: 4em; /* Increase font size */
       text-shadow: 0 0 5px #04dc00, 0 0 10px #04dc00, 0 0 15px #04dc00; /* Add glowing effect */
       font-family: Arial, sans-serif; /* Set font to Arial */
       margin-bottom: 20px; /* Add margin for spacing */
@@ -104,7 +105,7 @@
     // Initialize particles.js
     particlesJS("particles-js", {
       particles: {
-        number: { value: 80, density: { enable: true, value_area: 800 } },
+        number: { value: 50, density: { enable: true, value_area: 800 } },
         color: { value: "#04dc00" }, // White particles
         shape: {
           type: "circle",
