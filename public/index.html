@@ -9,6 +9,30 @@
   <script src="/uv/uv.config.js"></script>
   <script src="/js/preload.js"></script>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    /* CSS for fullscreen iframe */
+    .frame {
+      display: none; /* Initially hidden */
+      width: 100%;
+      height: 100vh; /* Full height */
+      border: none;
+      position: fixed; /* Fixed positioning */
+      top: 0;
+      left: 0;
+      z-index: 1; /* Place it above other elements */
+    }
+
+    .center-container {
+      position: relative;
+      z-index: 2; /* Ensure this is above the iframe */
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    #home-button {
+      margin-top: 10px;
+    }
+  </style>
 </head>
 
 <body theme="main">
@@ -51,34 +75,10 @@
     });
 
     // Example usage: Call showIframe with a URL to display
-    // showIframe('https://example.com'); // Uncomment to test
+    // Uncomment this line to test the iframe visibility
+    // showIframe('https://example.com'); // Replace with your desired URL
   </script>
 
 </body>
-
-<style>
-  /* CSS for fullscreen iframe */
-  .frame {
-    display: none; /* Initially hidden */
-    width: 100%;
-    height: 100vh; /* Full height */
-    border: none;
-    position: fixed; /* Fixed positioning */
-    top: 0;
-    left: 0;
-    z-index: 1; /* Place it above other elements */
-  }
-
-  .center-container {
-    position: relative;
-    z-index: 2; /* Ensure this is above the iframe */
-    text-align: center;
-    margin-top: 20px;
-  }
-
-  #home-button {
-    margin-top: 10px;
-  }
-</style>
 
 </html>
