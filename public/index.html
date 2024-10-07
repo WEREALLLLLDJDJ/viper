@@ -12,25 +12,39 @@
       margin: 0;
       display: flex;
       flex-direction: column;
+      position: relative; /* Ensure body is relative for absolute positioning */
     }
 
     .center-container {
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 20px; /* Add some padding */
-      z-index: 1; /* Ensure this is above the iframe */
-      position: relative; /* Position relative for layering */
+      padding: 20px;
+      z-index: 1;
+      position: relative;
     }
 
     .frame {
       width: 100%;
       height: 100%;
-      border: none; /* Remove the default border */
-      position: absolute; /* Position the iframe absolutely */
-      top: 0; /* Align to the top */
-      left: 0; /* Align to the left */
-      z-index: 0; /* Send it to the back */
+      border: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    .refresh-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: none; /* Hide the button initially */
+      padding: 10px 15px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -40,10 +54,35 @@
     <h1>Search</h1>
     <input class="pxyinput" type="text" placeholder="Search..." />
   </div>
+  <button class="refresh-button" id="refreshButton">Refresh</button>
   <iframe class="frame"></iframe>
-</body>
 
-<script src="./js/index.js"></script>
-<script src="./js/search.js"></script>
+  <script src="./js/index.js"></script>
+  <script src="./js/search.js"></script>
+  <script>
+    const searchInput = document.querySelector('.pxyinput');
+    const refreshButton = document.getElementById('refreshButton');
+
+    // Function to show the refresh button
+    const showRefreshButton = () => {
+      refreshButton.style.display = 'block';
+    };
+
+    // Function to refresh the page
+    const refreshPage = () => {
+      location.reload();
+    };
+
+    // Event listener for keypress in the search input
+    searchInput.addEventListener('keypress', (event) => {
+      if (event.key === 'Enter') {
+        showRefreshButton();
+      }
+    });
+
+    // Event listener for the refresh button
+    refreshButton.addEventListener('click', refreshPage);
+  </script>
+</body>
 
 </html>
