@@ -31,7 +31,7 @@
       position: absolute;
       top: 0;
       left: 0;
-      z-index: 0;
+      z-index: 0; /* Send iframe to the back */
     }
 
     .refresh-button {
@@ -45,6 +45,7 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
+      z-index: 2; /* Ensure button is on top */
     }
   </style>
 </head>
