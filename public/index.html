@@ -57,7 +57,7 @@
     <h1>Search</h1>
     <input class="pxyinput" type="text" placeholder="Search..." />
   </div>
-  <button class="refresh-button" id="refreshButton">Refresh</button>
+  <button class="refresh-button" id="refreshButton">Home</button>
   <iframe class="frame" id="contentFrame"></iframe>
 
   <script src="./js/index.js"></script>
@@ -74,7 +74,7 @@
 
     // Function to refresh the page
     const refreshPage = () => {
-      contentFrame.contentWindow.location.reload();
+      window.location.href = "./index.html"
     };
 
     // Event listener for when the iframe loads
