@@ -7,67 +7,43 @@
   <script src="/uv/uv.config.js"></script>
   <script src="/js/preload.js"></script>
   <style>
-    .close-button {
-      display: none; /* Initially hidden */
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background-color: red;
-      color: white;
-      border: none;
-      padding: 10px;
-      cursor: pointer;
+    html, body {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
     }
-    .iframe-container {
-      position: relative;
+
+    .center-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px; /* Add some padding */
+      z-index: 1; /* Ensure this is above the iframe */
+      position: relative; /* Position relative for layering */
+    }
+
+    .frame {
+      width: 100%;
+      height: 100%;
+      border: none; /* Remove the default border */
+      position: absolute; /* Position the iframe absolutely */
+      top: 0; /* Align to the top */
+      left: 0; /* Align to the left */
+      z-index: 0; /* Send it to the back */
     }
   </style>
 </head>
 
-<body theme="main">
-  <nav>
-    <div class="logo">
-      <h1>Viper</h1>
-    </div>
-
-    <p id="time"></p>
-  </nav>
-
+<body>
   <div class="center-container">
     <h1>Search</h1>
     <input class="pxyinput" type="text" placeholder="Search..." />
-    <button class="close-button" id="closeButton">Close</button>
   </div>
-  
-  <div class="iframe-container">
-    <iframe class="frame" id="myIframe"></iframe>
-  </div>
-  
-  <script src="./js/index.js"></script>
-  <script src="./js/search.js"></script>
-  <script>
-    const iframe = document.getElementById('myIframe');
-    const closeButton = document.getElementById('closeButton');
-
-    // Function to toggle the iframe and show/hide the close button
-    function toggleIframe() {
-      if (iframe.style.width === '0px' || iframe.style.height === '0px') {
-        iframe.style.width = '100%'; // Set your desired width
-        iframe.style.height = '400px'; // Set your desired height
-        closeButton.style.display = 'block'; // Show the close button
-      } else {
-        iframe.style.width = '0px';
-        iframe.style.height = '0px';
-        closeButton.style.display = 'none'; // Hide the close button
-      }
-    }
-
-    // Add an event listener to the close button
-    closeButton.addEventListener('click', toggleIframe);
-    
-    // Call toggleIframe on page load to show/hide iframe based on initial state
-    window.onload = toggleIframe;
-  </script>
+  <iframe class="frame"></iframe>
 </body>
+
+<script src="./js/index.js"></script>
+<script src="./js/search.js"></script>
 
 </html>
