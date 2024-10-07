@@ -63,6 +63,7 @@
   <script>
     const searchInput = document.querySelector('.pxyinput');
     const refreshButton = document.getElementById('refreshButton');
+    const contentFrame = document.getElementById('contentFrame');
 
     // Function to show the refresh button
     const showRefreshButton = () => {
@@ -75,10 +76,8 @@
     };
 
     // Event listener for keypress in the search input
-    searchInput.addEventListener('keypress', (event) => {
-      if (event.key === 'Enter') {
-        showRefreshButton();
-      }
+    contentFrame.addEventListener('load', () => {
+      showRefreshButton();
     });
 
     // Event listener for the refresh button
