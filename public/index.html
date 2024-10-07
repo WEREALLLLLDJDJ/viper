@@ -2,276 +2,146 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Viper</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <style>
-        :root {
-            --primary-color: #15df00;
-            --background-color: #000;
-            --input-background: #333;
-            --input-text-color: #fff;
-            --footer-text-color: #fff;
-            --hover-text-color: #5c00a2;
-            --placeholder-color: #aaa;
-            --text-shadow-color: rgba(21, 223, 0, 0.8);
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Viper</title>
+  <script src="/uv/uv.bundle.js" charset="UTF-8"></script>
+  <script src="/uv/uv.config.js"></script>
+  <script src="/js/preload.js"></script>
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden; /* Prevent scrollbars */
+      background-color: black; /* Set background to black */
+    }
 
-        /* Style for the particles container */
-        #particles-js {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: -1; /* Behind other content */
-            filter: blur(10px);
-        }
+    #particles-js {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 0; /* Send particles to the back */
+    }
 
-        html, body {
-            height: 100%;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            background-color: var(--background-color);
-            font-family: 'Open Sans', sans-serif;
-            overflow: hidden;
-        }
+    .center-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      z-index: 1; /* Bring search input to the front */
+      position: relative;
+      backdrop-filter: blur(10px); /* Blur background */
+      background-color: rgba(255, 255, 255, 0.2); /* Slightly transparent white background for contrast */
+      border-radius: 10px; /* Optional: Rounded corners for the container */
+    }
 
-        .main {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: var(--primary-color);
-            text-shadow: 0 0 20px var(--text-shadow-color), 0 0 30px var(--text-shadow-color);
-            user-select: none;
-            z-index: 1; /* Above the particles */
-        }
+    .frame {
+      width: 100%;
+      height: calc(100%); /* Adjust height to account for the header */
+      border: none;
+      position: absolute;
+      top: 60px; /* Position below the header */
+      left: 0;
+      z-index: 0;
+    }
 
-        h1 {
-            font-size: 4em;
-            margin: 0;
-            animation: fadeIn 1.5s ease-in-out forwards;
-            opacity: 0;
-        }
-
-        .phrase {
-            font-size: 1.2em;
-            margin: 20px 0;
-            color: #ffffff;
-            text-shadow: 0 0 10px #ffffff;
-            animation: fadeIn 2.5s ease-in-out forwards;
-            opacity: 0;
-        }
-
-        .search-bar {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 20px;
-            animation: fadeIn 3.5s ease-in-out forwards;
-            opacity: 0;
-        }
-
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-            }
-        }
-
-        .form__input {
-            padding: 10px;
-            font-size: 1em;
-            border: 2px solid var(--primary-color);
-            border-radius: 5px;
-            outline: none;
-            color: var(--input-text-color);
-            background-color: var(--input-background);
-            transition: border-color 0.3s;
-        }
-
-        .form__input::placeholder {
-            color: var(--placeholder-color);
-        }
-
-        .form__input:focus {
-            border-color: #fff;
-        }
-
-        .refresh-button {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            display: none;
-            padding: 10px 15px;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            z-index: 2; /* Above everything */
-            transition: background-color 0.3s;
-        }
-
-        .refresh-button:hover {
-            background-color: var(--hover-text-color);
-        }
-
-        .frame {
-            width: 100%;
-            height: calc(100% - 60px);
-            border: none;
-            position: absolute;
-            top: 60px;
-            left: 0;
-            z-index: 0;
-        }
-    </style>
+    .refresh-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: none;
+      padding: 10px 15px;
+      background-color: rgba(0, 123, 255, 0.8); /* Slightly transparent background */
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      z-index: 2;
+    }
+  </style>
 </head>
 
 <body>
-    <div id="particles-js"></div>
+  <div id="particles-js"></div> <!-- Particle background -->
+  <div class="center-container">
+    <h1 style="color: white;">Search</h1> <!-- Change header color to white for contrast -->
+    <input class="pxyinput" type="text" placeholder="Search..." />
+  </div>
+  <button class="refresh-button" id="refreshButton">Home</button>
+  <iframe class="frame" id="contentFrame"></iframe>
 
-    <main class="main">
-        <h1>Viper</h1>
-        <div class="phrase" id="random-phrase"></div>
-        <div class="search-bar">
-            <form id="uv-form" aria-label="Search Form">
-                <input id="uv-address" type="text" placeholder="Search..." class="form__input" required aria-label="Search input" />
-            </form>
-        </div>
-    </main>
+  <script src="./js/index.js"></script>
+  <script src="./js/search.js"></script>
+  <script>
+    // Initialize particles.js
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 80, density: { enable: true, value_area: 800 } },
+        color: { value: "#04dc00" }, // White particles
+        shape: {
+          type: "circle",
+          stroke: { width: 0, color: "#000000" },
+          polygon: { nb_sides: 5 },
+          image: { src: "img/github.svg", width: 100, height: 100 }
+        },
+        opacity: { value: 0.5, random: false, anim: { enable: false, speed: 1, opacity_min: 0, sync: false } },
+        size: { value: 5, random: true, anim: { enable: false, speed: 40, size_min: 0.1, sync: false } },
+        line_linked: { enable: true, distance: 150, color: "#ffffff", opacity: 0.4, width: 1 },
+        move: {
+          enable: true,
+          speed: 6,
+          direction: "none",
+          random: false,
+          straight: false,
+          out_mode: "out",
+          bounce: false,
+          attract: { enable: false, rotateX: 600, rotateY: 1200 }
+        }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: { enable: true, mode: "repulse" },
+          onclick: { enable: true, mode: "push" },
+          resize: true
+        },
+        modes: {
+          grab: { distance: 400, line_linked: { opacity: 1 } },
+          bubble: { distance: 400, size: 40, duration: 2, opacity: 8, speed: 3 },
+          repulse: { distance: 200, duration: 0.4 },
+          push: { particles_nb: 4 },
+          remove: { particles_nb: 2 }
+        }
+      },
+      retina_detect: true
+    });
 
-    <button class="refresh-button" id="refreshButton">Home</button>
-    <iframe class="frame" id="contentFrame"></iframe>
+    const searchInput = document.querySelector('.pxyinput');
+    const refreshButton = document.getElementById('refreshButton');
+    const contentFrame = document.getElementById('contentFrame');
 
-    <script src="./js/index.js"></script>
-    <script src="./js/search.js"></script>
-    <script>
-        const phrases = [
-            "Ermmmm... what the sigma?",
-            "I love interstellar!",
-            "v1.00 is horrible!",
-            "I can't code.",
-            "Siege is a fun game!",
-            "I love proxies!",
-            "Too many memes!",
-            "Javascript 😍",
-            "R.I.P Project Unblocked.",
-            "Sick burn bro!",
-            "13,000 lines of code!",
-            "Best proxy!",
-            "Honey? Where's my supersuit?",
-            "Define interface.",
-            "Game page soon?",
-            "Sub to Dustie Fn!",
-            "Go Guardian got nothin on me!"
-        ];
+    // Function to show the refresh button
+    const showRefreshButton = () => {
+      refreshButton.style.display = 'block';
+    };
 
-        const displayRandomPhrase = () => {
-            const randomIndex = Math.floor(Math.random() * phrases.length);
-            document.getElementById('random-phrase').textContent = phrases[randomIndex];
-        };
+    // Function to refresh the page
+    const refreshPage = () => {
+      window.location.href = "./index.html"
+    };
 
-        // Initialize particles.js
-        particlesJS("particles-js", {
-            particles: {
-                number: {
-                    value: 60,
-                    density: {
-                        enable: true,
-                        value_area: 800
-                    }
-                },
-                color: {
-                    value: "#15df00"
-                },
-                shape: {
-                    type: "circle",
-                    stroke: {
-                        width: 0,
-                        color: "#15df00"
-                    },
-                },
-                opacity: {
-                    value: 0.5,
-                    random: false,
-                },
-                size: {
-                    value: 5,
-                    random: true,
-                },
-                line_linked: {
-                    enable: true,
-                    distance: 150,
-                    color: "#ffffff",
-                    opacity: 0.4,
-                    width: 1
-                },
-                move: {
-                    enable: true,
-                    speed: 6,
-                    direction: "none",
-                    out_mode: "out",
-                }
-            },
-            interactivity: {
-                detect_on: "canvas",
-                events: {
-                    onhover: {
-                        enable: true,
-                        mode: "repulse"
-                    },
-                    onclick: {
-                        enable: true,
-                        mode: "push"
-                    },
-                    resize: true
-                },
-                modes: {
-                    repulse: {
-                        distance: 200,
-                        duration: 0.4
-                    }
-                }
-            },
-            retina_detect: true
-        });
+    // Event listener for when the iframe loads
+    contentFrame.addEventListener('load', () => {
+      showRefreshButton();
+    });
 
-        const refreshButton = document.getElementById('refreshButton');
-        const contentFrame = document.getElementById('contentFrame');
-
-        // Function to show the refresh button
-        const showRefreshButton = () => {
-            refreshButton.style.display = 'block';
-        };
-
-        // Function to refresh the page
-        const refreshPage = () => {
-            window.location.href = "./index.html";
-        };
-
-        // Event listener for when the iframe loads
-        contentFrame.addEventListener('load', () => {
-            showRefreshButton();
-        });
-
-        // Event listener for the refresh button
-        refreshButton.addEventListener('click', refreshPage);
-
-        // Display a random phrase on load
-        displayRandomPhrase();
-    </script>
+    // Event listener for the refresh button
+    refreshButton.addEventListener('click', refreshPage);
+  </script>
 </body>
 
 </html>
